@@ -1,0 +1,104 @@
+<h1 class="animated fadeIn faster">Reporte <small>de Incidencia:</small> </h1>
+<hr>
+<p class="animated fadeIn faster">Reporte la incidencia del vehículo, recuerde que es importante su pronto reporte.</p>
+
+
+<div class="row animated fadeIn faster">
+    <div class="col">
+        <form #f="ngForm" (ngSubmit)="guardar(f)">
+
+            <div class="form-group">
+                <label>Firebase ID:</label>
+                <input type="text" class="form-control" placeholder="Firebase ID" disabled="disabled" name="id" [(ngModel)]="incidencia.id">
+                <small class="form-text text-muted">Este campo es autogenerado</small>
+
+            </div>
+            <span *ngIf="f.submitted && f.controls['observacion'].errors?.required" class="text-danger animated fadeIn">
+                 Es obligatorio ingresar observación
+             </span>
+            <span *ngIf="f.submitted && f.controls['observacion'].errors?.minlength" class="text-danger animated fadeIn">
+                Ingresar como minimo {{f.controls['observacion'].errors.minlength.requiredLength}} carácteres
+            </span>
+            <div class="form-group">
+                <label>Observación:</label>
+                <textarea placeholder="Ingrese observación" class="form-control" rows="5" required name="observacion" [(ngModel)]="incidencia.observacion" minlength="30"></textarea>
+            </div>
+
+
+
+
+            <span *ngIf="f.submitted && f.controls['caracter'].errors?.required" class="text-danger animated fadeIn">
+                Es obligatorio ingresar carácter
+            </span>
+            <span *ngIf="f.submitted && f.controls['caracter'].errors?.minlength" class="text-danger animated fadeIn">
+               Ingresar como minimo {{f.controls['caracter'].errors.minlength.requiredLength}} carácteres
+           </span>
+            <div class="form-group">
+                <label>Carácter:</label>
+                <input type="text" class="form-control" placeholder="Ingrese carácter" name="caracter" [(ngModel)]="incidencia.caracter" required minlength="6">
+            </div>
+
+
+
+
+            <span *ngIf="f.submitted && f.controls['codVehiculo'].errors?.required" class="text-danger animated fadeIn">
+                Es obligatorio ingresar código cehículo
+            </span>
+            <span *ngIf="f.submitted && f.controls['codVehiculo'].errors?.minlength" class="text-danger animated fadeIn">
+               Ingresar como minimo {{f.controls['codVehiculo'].errors.minlength.requiredLength}} carácteres
+           </span>
+            <div class="form-group">
+                <label>Código Vehículo:</label>
+                <input type="text" class="form-control" placeholder="Códido Vehículo" required name="codVehiculo" [(ngModel)]="incidencia.codVehiculo" minlength="6">
+            </div>
+
+
+
+
+            <span *ngIf="f.submitted && f.controls['codEmpleado'].errors?.required" class="text-danger animated fadeIn">
+                Es obligatorio ingresar código empleado
+            </span>
+            <span *ngIf="f.submitted && f.controls['codEmpleado'].errors?.minlength" class="text-danger animated fadeIn">
+               Ingresar como minimo {{f.controls['codEmpleado'].errors.minlength.requiredLength}} carácteres
+           </span>
+            <div class="form-group">
+                <label>Código Empleado:</label>
+                <input type="text" class="form-control" placeholder="Códido Empleado" required name="codEmpleado" [(ngModel)]="incidencia.codEmpleado" minlength="6">
+            </div>
+
+            <div class="form-group">
+                <label>Estado</label>
+                <br>
+                <button *ngIf="!incidencia.estado" (click)="incidencia.estado=true" class="btn btn-outline-danger w-100" type="button">
+                   <i class="fa fa-smile-wink"></i>
+                   En espera
+                 </button>
+
+                <button *ngIf="incidencia.estado" (click)="incidencia.estado=false" class="btn btn-outline-success w-100" type="button">
+                  <i class="fa fa-dizzy"></i>
+                  Resuelto
+                </button>
+
+
+            </div>
+            <hr>
+
+            <div class="form-group text-center">
+
+                <button class="btn btn-primary w-50" type="submit">
+                <i class="fa fa-save"></i>
+                Guardar
+              </button>
+            </div>
+
+
+
+
+        </form>
+
+
+
+
+    </div>
+
+</div>

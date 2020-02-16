@@ -1,0 +1,43 @@
+.contenedor-imagen {
+    display: flex;
+    justify-content: center;
+}
+
+.imagen2 {
+    display: none;
+}
+
+.contenedor-mensaje {
+    margin-top: 30px;
+}
+
+p {
+    padding: 10px;
+    font-size: 18px;
+}
+
+@media screen and (max-width:575px) {}
+
+@media screen and (max-width:1000px) {
+    h1 {
+        font-size: 32px;
+    }
+    .imagen1 {
+        display: none;
+    }
+    .imagen2 {
+        display: block;
+    }
+}
+
+.jumbotron {
+    background: url('../../../../assets/images/llanito.jpg');
+    background-size: cover;
+    color: white;
+    overflow: hidden;
+    border-radius: 10px;
+}
+
+.jumbotron .container p {
+    color: white;
+}

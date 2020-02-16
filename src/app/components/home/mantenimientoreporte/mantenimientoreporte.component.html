@@ -1,0 +1,123 @@
+<h1 class="animated fadeIn">Lista <small>de Incidencias:</small> </h1>
+<hr>
+<p class="animated fadeIn">Lista de incidencias de los vehiculos.</p>
+<div class="table-responsive">
+    <table class="table mt-3 animated fadeIn " *ngIf="!cargando && incidencias.length>0">
+        <thead class="thead-dark">
+            <tr>
+                <th scope="col">#</th>
+                <th scope="col">Observación</th>
+
+                <th scope="col">Estado</th>
+                <th scope="col">Fecha</th>
+                <th scope="col">Acciones</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr *ngFor="let  incidencia of incidencias;let i=index ">
+                <th scope="row">{{i+1}}</th>
+                <td>{{incidencia.observacion}}</td>
+
+                <td>
+                    <label *ngIf="incidencia.estado" class="badge badge-success">Atendido</label>
+                    <label *ngIf="!incidencia.estado" class="badge badge-danger">Sin atender</label>
+                </td>
+                <td>{{incidencia.fecha|date}}</td>
+
+                <td>
+                    <button class="btn btn-info mr-1 mb-1" [routerLink]="['/home/reportes',incidencia.id]">
+                  <i class="fa fa-pencil"></i>
+              </button>
+                    <button class="btn btn-danger mr-1 mb-1" (click)="borrarIncidencia(incidencia,i)">
+                  <i class="fa fa-trash "></i>
+              </button>
+                    <button class="btn btn-success mb-1" (click)="enviarInfoIncidencia(incidencia,exampleModal)">
+                <i class="fa fa-bar-chart"></i>
+            </button>
+
+
+
+
+
+
+                </td>
+
+            </tr>
+
+        </tbody>
+
+    </table>
+
+</div>
+<ng-template #exampleModal let-modal>
+
+    <div class="modal-header">
+        <h4 class="modal-title" id="modal-basic-title">Detalles incidencia:</h4>
+
+    </div>
+    <div class="modal-body">
+        <form>
+            <div class="form-group">
+                <label>Código:</label>
+                <div class="input-group">
+                    <input class="form-control" [placeholder]="incidencia.id" disabled>
+                </div>
+                <label>Observación:</label>
+                <div class="input-group">
+                    <textarea [placeholder]="incidencia.observacion" class="form-control" rows="5" disabled></textarea>
+                </div>
+                <label>Carácter:</label>
+                <div class="input-group">
+                    <input class="form-control" [placeholder]="incidencia.caracter" disabled>
+                </div>
+                <label>Estado:</label>
+                <div class="input-group">
+                    <input *ngIf="incidencia.estado" class="form-control" placeholder="Atendido" disabled>
+                    <input *ngIf="!incidencia.estado" class="form-control" placeholder="Sin atender" disabled>
+                </div>
+                <label>Fecha:</label>
+                <div class="input-group">
+                    <input class="form-control" [placeholder]="incidencia.fecha | date:'EEEE, MMMM d, y, h:mm:ss a'" disabled>
+                </div>
+                <label>Código Empleado:</label>
+                <div class="input-group">
+                    <input class="form-control" [placeholder]="incidencia.codEmpleado" disabled>
+                </div>
+                <label>Código Vehículo:</label>
+                <div class="input-group">
+                    <input class="form-control" [placeholder]="incidencia.codVehiculo" disabled>
+                </div>
+            </div>
+        </form>
+    </div>
+    <div class="modal-footer">
+        <button type="button" class="btn btn-secondary w-100" (click)="modal.close('Save click')">Salir</button>
+    </div>
+
+</ng-template>
+
+
+
+
+
+
+<div *ngIf="!cargando && incidencias.length===0" class="alert alert-warning text-center mt-3 animated fadeIn ">
+    <h4 class="alert-heading ">No hay registros</h4>
+    <p class="alert-warning">
+        <i class="fa fa-exclamation-circle fa-5x "></i>
+    </p>
+
+</div>
+
+<div *ngIf="cargando" class="alert alert-info text-center mt-3 animated fadeIn ">
+    <h4 class="alert-heading ">Cargando</h4>
+    <p class="alert-info">
+        <i class="fa fa-spinner fa-pulse fa-5x fa-fw"></i>
+    </p>
+    <p class="mb-0 alert-info">Espere porfavor</p>
+</div>
+
+<div class="container text-center contenedor" *ngIf="cargando">
+
+    <img src="../../../../assets/images/giphy.gif" alt="" class="img-fluid gif">
+</div>
